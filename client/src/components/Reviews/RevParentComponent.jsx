@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper, Grid } from '@material-ui/core';
+
+import { fetchReviews, fetchMeta } from '../../actions/reviewsActions';
 
 // Child Components
 import Recommended from './Recommended.jsx';
@@ -28,8 +32,20 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const RevParentComponent = () => {
+const RevParentComponent = (props) => {
   const classes = useStyles();
+
+  const {
+    fetchReviews,
+    fetchMeta,
+    location: { pathname }
+  } = props;
+
+  // Fetching our data from the API
+  useEffect(() => {
+    fetchReviews(pathname);
+    fetchMeta(pathname);
+  });
 
   return (
     <div className={classes.root} id="reviews">
@@ -72,4 +88,27 @@ const RevParentComponent = () => {
   );
 };
 
-export default RevParentComponent;
+ReviewsWrapper.propTypes = {
+  fetchReviews: PropTypes.func.isRequired,
+  fetchMeta: PropTypes.func.isRequired,
+  location: PropTypes.object.isRequired
+};
+
+const mapStateToProps = (store) => ({
+  reviews: store.reviews,
+  meta: store.meta
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  fetchReviews: (id) => {
+    dispatch(fetchReviews(id));
+  },
+  fetchMeta: (id) => {
+    dispatch(fetchMeta(id));
+  }
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RevParentComponent);
