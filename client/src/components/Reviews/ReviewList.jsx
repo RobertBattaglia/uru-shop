@@ -13,6 +13,9 @@ import {
 } from '../../actions/reviewsActions';
 
 import ReviewEntry from './ReviewEntry';
+import ReviewCounter from './ReviewCounter';
+import SelectControl from './Relevance';
+
 import MoreReviews from './MoreReviews';
 import AddReviewModal from './AddReviewModal';
 
@@ -71,17 +74,39 @@ import AddReviewModal from './AddReviewModal';
 // }
 
 const ReviewList = (props) => {
-  const { data, fetchReviews } = props;
+  const { reviews, limit, reviewsShow } = props;
 
-  return !data ? (
+  const renderReviews = () => {
+    // const { limit } = props;
+
+    let reviewsList = reviews.map((review) => {
+      return <ReviewEntry key={review.review_id} review={review} />;
+    });
+
+    return reviewsList.slice(0, limit);
+  };
+
+  return !reviews ? (
     <h3>...Loading reviews</h3>
   ) : (
     <div>
+      {/* Reviews List Summary and Select */}
+      <Grid item xs={9} style={{ fontSize: 20, fontWeight: 700 }}>
+        <Grid
+          container
+          direction="row"
+          justify="flex-start"
+          alignItems="flex-end"
+        >
+          <ReviewCounter /> {'   '} <SelectControl />
+        </Grid>
+      </Grid>
+      {renderReviews()}
       {/* 
       
-      Each Entry
+      TODO: DELTE, this is handled in renderfunction Each Entry
 
-      {data.results.slice(0, this.state.limit).map((review) => {
+      {reviews.results.slice(0, this.state.limit).map((review) => {
         return (
           <div key={review.review_id}>
             <ReviewEntry review={review} />
@@ -89,40 +114,41 @@ const ReviewList = (props) => {
         );
       })} */}
 
-      {/* Buttons */}
-      <Grid
+      {/* TODO: DELETE, MOVED TO PARENT COMP Buttons */}
+      {/* <Grid
         container
         alignItems="baseline"
         spacing={6}
         justify="flex-start"
         direction="row"
       >
-        <Grid
-          item
-
-        >
+        <Grid item>
           <MoreReviews />
         </Grid>
         <Grid item>
           <AddReviewModal />
         </Grid>
-      </Grid>
+      </Grid> */}
     </div>
   );
 };
 
 const mapStateToProps = (store) => ({
-  data: store.reviews.data
+  reviews: store.reviews.data,
+  meta: store.reviews.meta,
+  limit: store.reviewsLimit
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchReviews: (productId, sort) => {
     dispatch(fetchReviews(productId, sort));
+  },
+  fetchMeta: (prodId) => {
+    dispatch(fetchMeta(prodId));
+  },
+  reviewsShow: (length) => {
+    dispatch(reviewsShow(length));
   }
-  // ,
-  // fetchMeta: (prodId) => {
-  //   dispatch(fetchMeta(prodId));
-  // }
 });
 
 export default connect(

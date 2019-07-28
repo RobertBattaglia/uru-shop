@@ -16,9 +16,9 @@ import Recommended from './Recommended.jsx';
 import SizeGraph from './SizeGraph.jsx';
 import ReviewList from './ReviewList.jsx';
 import StarGraphsList from './StarGraphsList.jsx';
+import ReviewCounter from './ReviewCounter';
 import SelectControl from './Relevance';
 import AverageRev from './AverageRev';
-import ReviewCounter from './ReviewCounter';
 // import MoreReviews from './MoreReviews';
 import AddReviewModal from './AddReviewModal';
 
@@ -75,7 +75,7 @@ const RevParentComponent = (props) => {
       </Button>
     );
 
-    let addButton = <AddReviewModal />;
+    let addButton = <AddReviewModal handleClose={handleOpen.bind(this)} />;
 
     if (showReviews - limit > 0) {
       return (
@@ -113,7 +113,7 @@ const RevParentComponent = (props) => {
         </Grid>
 
         {/* Right side, Review List, Count, Sort, and "More"/"Add" Buttons */}
-        <Grid item xs={9} style={{ fontSize: 20, fontWeight: 700 }}>
+        {/* <Grid item xs={9} style={{ fontSize: 20, fontWeight: 700 }}>
           <Grid
             container
             direction="row"
@@ -121,26 +121,26 @@ const RevParentComponent = (props) => {
             alignItems="flex-end"
           >
             <ReviewCounter /> {'   '} <SelectControl />
-          </Grid>
+          </Grid> */}
+        {/* </Grid> */}
 
-          {/* List */}
-          <Grid>
-            <ReviewList />
-          </Grid>
-          {/* Buttons */}
-          <Box className={classes.buttons}>
-            {renderButtons()}
-
-            <Dialog
-              open={props.open}
-              onClose={handleClose}
-              fullWidth={true}
-              maxWidth="sm"
-            >
-              <AddReviewModal handleClose={handleClose.bind(this)} />
-            </Dialog>
-          </Box>
+        {/* List */}
+        <Grid>
+          <ReviewList />
         </Grid>
+
+        {/* Load and Add Buttons */}
+        <Box className={classes.buttons}>
+          {renderButtons()}
+          <Dialog
+            open={props.open}
+            onClose={handleClose}
+            fullWidth={true}
+            maxWidth="sm"
+          >
+            <AddReviewModal handleClose={handleClose.bind(this)} />
+          </Dialog>
+        </Box>
       </Grid>
     </div>
   );

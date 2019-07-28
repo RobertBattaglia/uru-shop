@@ -21,7 +21,7 @@ const rootReducer = combineReducers({
   reviews: reviewsReducer,
   related: relatedReducer,
   openReviews: openReducer,
-  reviewSort: sortReducer,
+  reviewsSort: sortReducer,
   reviewsShow: showReducer,
   reviewsLimit: limitReducer
 });
