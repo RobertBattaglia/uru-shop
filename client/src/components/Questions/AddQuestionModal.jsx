@@ -1,23 +1,23 @@
-import React, { Component } from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import { connect } from "react-redux";
-import { fetchQuestions, postQuestion } from "../../actions/questionsActions";
+import React, { Component } from 'react';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import { connect } from 'react-redux';
+import { fetchQuestions, postQuestion } from '../../actions/questionsActions';
 
 class AddQuestionModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      hover: "bold",
+      hover: 'bold',
       open: false,
-      question: "",
-      name: "",
-      email: "",
-      fail: ""
+      question: '',
+      name: '',
+      email: '',
+      fail: ''
     };
     this.handleHoverOn = this.handleHoverOn.bind(this);
     this.handleHoverOff = this.handleHoverOff.bind(this);
@@ -29,10 +29,10 @@ class AddQuestionModal extends Component {
     this.handleEmail = this.handleEmail.bind(this);
   }
   handleHoverOn() {
-    this.setState({ hover: "normal" });
+    this.setState({ hover: 'normal' });
   }
   handleHoverOff() {
-    this.setState({ hover: "bold" });
+    this.setState({ hover: 'bold' });
   }
   handleClickOpen() {
     this.setState({ open: true });
@@ -57,9 +57,9 @@ class AddQuestionModal extends Component {
           fetchQuestions(productId);
         }, 1000);
         //reset all temp state to empty
-        this.setState({ open: false, question: "", name: "", email: "" });
-      } else this.setState({ fail: "Invalied email" });
-    } else this.setState({ fail: "Blank with symbol * are required" });
+        this.setState({ open: false, question: '', name: '', email: '' });
+      } else this.setState({ fail: 'Invalied email' });
+    } else this.setState({ fail: 'Blank with symbol * are required' });
   }
 
   handleQuestion(e) {
@@ -80,7 +80,7 @@ class AddQuestionModal extends Component {
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle>Add A Question</DialogTitle>
-        <p style={{ whiteSpace: "pre-wrap", color: "red" }}>{`  ${
+        <p style={{ whiteSpace: 'pre-wrap', color: 'red' }}>{`  ${
           this.state.fail
         }`}</p>
         <DialogContent>
@@ -131,8 +131,8 @@ class AddQuestionModal extends Component {
           style={{
             fontWeight: this.state.hover,
             fontSize: 24,
-            cursor: "pointer",
-            padding: "20px"
+            cursor: 'pointer',
+            padding: '20px'
           }}
         >
           ADD A QUESTION +
@@ -143,12 +143,12 @@ class AddQuestionModal extends Component {
   }
 }
 
-const mapStateToProps = store => ({
+const mapStateToProps = (store) => ({
   productId: store.questions.productId
 });
 
-const mapDispatchToProps = dispatch => ({
-  fetchQuestions: id => {
+const mapDispatchToProps = (dispatch) => ({
+  fetchQuestions: (id) => {
     dispatch(fetchQuestions(id));
   }
 });

@@ -83,6 +83,8 @@ const ReviewList = (props) => {
       return <ReviewEntry key={review.review_id} review={review} />;
     });
 
+    reviewsShow(reviewsList.length);
+    
     return reviewsList.slice(0, limit);
   };
 

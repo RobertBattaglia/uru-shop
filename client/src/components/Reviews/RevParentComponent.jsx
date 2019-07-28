@@ -3,12 +3,13 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Grid, Dialog } from '@material-ui/core';
+import { Paper, Grid, Dialog, Box, Button } from '@material-ui/core';
 
 import {
   fetchReviews,
   fetchMeta,
-  openReviews
+  openReviews,
+  reviewLimit
 } from '../../actions/reviewsActions';
 
 // Child Components
@@ -60,6 +61,10 @@ const RevParentComponent = (props) => {
 
   const handleClose = () => {
     openReviews(false);
+  };
+
+  const handleLimit = () => {
+    reviewLimit();
   };
 
   const renderButtons = () => {
@@ -125,12 +130,10 @@ const RevParentComponent = (props) => {
         {/* </Grid> */}
 
         {/* List */}
-        <Grid>
-          <ReviewList />
-        </Grid>
+        <Grid>{/* <ReviewList /> */}</Grid>
 
         {/* Load and Add Buttons */}
-        <Box className={classes.buttons}>
+        {/* <Box className={classes.buttons}>
           {renderButtons()}
           <Dialog
             open={props.open}
@@ -140,7 +143,7 @@ const RevParentComponent = (props) => {
           >
             <AddReviewModal handleClose={handleClose.bind(this)} />
           </Dialog>
-        </Box>
+        </Box> */}
       </Grid>
     </div>
   );
@@ -166,6 +169,12 @@ const mapDispatchToProps = (dispatch) => ({
   },
   fetchMeta: (id) => {
     dispatch(fetchMeta(id));
+  },
+  openReviews: (boolean) => {
+    dispatch(openReviews(boolean));
+  },
+  reviewLimit: () => {
+    dispatch(reviewLimit());
   }
 });
 
