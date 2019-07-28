@@ -77,6 +77,9 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchReviews: (productId, sort) => {
     dispatch(fetchReviews(productId, sort));
+  },
+  fetchMeta: (prodId) => {
+    dispatch(fetchMeta(prodId))
   }
 });
 

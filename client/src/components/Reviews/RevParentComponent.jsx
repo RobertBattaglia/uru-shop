@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -88,12 +88,13 @@ const RevParentComponent = (props) => {
   );
 };
 
-ReviewsWrapper.propTypes = {
-  fetchReviews: PropTypes.func.isRequired,
-  fetchMeta: PropTypes.func.isRequired,
-  location: PropTypes.object.isRequired
-};
+// RevParentComponent.propTypes = {
+//   fetchReviews: PropTypes.func.isRequired,
+//   fetchMeta: PropTypes.func.isRequired,
+//   location: PropTypes.object.isRequired
+// };
 
+// FIXME: i don't think I need this...
 const mapStateToProps = (store) => ({
   reviews: store.reviews,
   meta: store.meta
