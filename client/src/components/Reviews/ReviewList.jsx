@@ -10,68 +10,102 @@ import ReviewEntry from './ReviewEntry';
 import MoreReviews from './MoreReviews';
 import AddReviewModal from './AddReviewModal';
 
-class ReviewList extends Component {
-  constructor(props) {
-    super(props);
+// class ReviewList extends Component {
+//   constructor(props) {
+//     super(props);
 
-    this.state = {
-      increment: 2,
-      limit: 2
-    };
-    this.loadMore = this.loadMore.bind(this);
-  }
+//     this.state = {
+//       increment: 2,
+//       limit: 2
+//     };
+//     this.loadMore = this.loadMore.bind(this);
+//   }
 
-  loadMore() {
-    this.setState({
-      limit: this.state.limit + this.state.increment
-    });
-  }
+//   loadMore() {
+//     this.setState({
+//       limit: this.state.limit + this.state.increment
+//     });
+//   }
+
+//   render() {
+//     const { data } = this.props.reviews;
+//     // const { product } = this.props.data;
+//     const { fetchReviews } = this.props;
+
+//     return !data ? (
+//       <h3>...Loading reviews</h3>
+//     ) : (
+//       <div>
+//         {data.results.slice(0, this.state.limit).map((review) => {
+//           return (
+//             <div key={review.review_id}>
+//               <ReviewEntry review={review} />
+//             </div>
+//           );
+//         })}
+
+//         {/* Buttons */}
+//         <Grid
+//           container
+//           alignItems="baseline"
+//           spacing={6}
+//           justify="flex-start"
+//           direction="row"
+//         >
+//           <Grid item onClick={this.loadMore}>
+//             <MoreReviews />
+//           </Grid>
+//           <Grid item>
+//             <AddReviewModal />
+//           </Grid>
+//         </Grid>
+//       </div>
+//     );
+//   }
+// }
+
+const ReviewList = (props) => {
+  const { data, fetchReviews } = props;
 
   // to get dynamic sorting
-  // useEffect(() => {
-  //   fetchReviews(productId, 'relevant');
-  //   getMeta(productId);
-  // }, [productId]);
+  useEffect(() => {
+    fetchReviews(productId, 'relevant');
+    getMeta(productId);
+  }, [productId]);
 
-  render() {
-    const { data } = this.props.reviews;
-    // const { product } = this.props.data;
-    const { fetchReviews } = this.props;
+  return !data ? (
+    <h3>...Loading reviews</h3>
+  ) : (
+    <div>
+      {data.results.slice(0, this.state.limit).map((review) => {
+        return (
+          <div key={review.review_id}>
+            <ReviewEntry review={review} />
+          </div>
+        );
+      })}
 
-    return !data ? (
-      <h3>...Loading reviews</h3>
-    ) : (
-      <div>
-        {data.results.slice(0, this.state.limit).map((review) => {
-          return (
-            <div key={review.review_id}>
-              <ReviewEntry review={review} />
-            </div>
-          );
-        })}
-
-        {/* Buttons */}
-        <Grid
-          container
-          alignItems="baseline"
-          spacing={6}
-          justify="flex-start"
-          direction="row"
-        >
-          <Grid item onClick={this.loadMore}>
-            <MoreReviews />
-          </Grid>
-          <Grid item>
-            <AddReviewModal />
-          </Grid>
+      {/* Buttons */}
+      <Grid
+        container
+        alignItems="baseline"
+        spacing={6}
+        justify="flex-start"
+        direction="row"
+      >
+        <Grid item onClick={this.loadMore}>
+          <MoreReviews />
         </Grid>
-      </div>
-    );
-  }
-}
+        <Grid item>
+          <AddReviewModal />
+        </Grid>
+      </Grid>
+    </div>
+  );
+};
 
 const mapStateToProps = (store) => ({
-  reviews: store.reviews
+  data: store.reviews.data
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -79,7 +113,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchReviews(productId, sort));
   },
   fetchMeta: (prodId) => {
-    dispatch(fetchMeta(prodId))
+    dispatch(fetchMeta(prodId));
   }
 });
 

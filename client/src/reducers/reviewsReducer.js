@@ -19,4 +19,22 @@ const reviewsReducer = (state = intialState, action) => {
   }
 };
 
-export default reviewsReducer;
+const sortReducer = (state = 'relevant', { type, payload }) => {
+  switch (type) {
+    case 'REVIEWS_SORT':
+      return payload;
+    default:
+      return state;
+  }
+};
+
+const showReducer = (state = 2, { type, payload }) => {
+  switch (type) {
+    case 'SHOW_REVIEWS':
+      return payload;
+    default:
+      return state;
+  }
+};
+
+export default { reviewsReducer, sortReducer, showReducer };

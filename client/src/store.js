@@ -1,17 +1,22 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import productReducer from './reducers/productReducer';
-import reviewsReducer from './reducers/reviewsReducer';
+import {
+  reviewsReducer,
+  sortReducer,
+  showReducer
+} from './reducers/reviewsReducer';
 import questionsReducer from './reducers/questionsReducer';
 import relatedReducer from './reducers/relatedReducer';
-import sortReducer from './reducers/sortReducer';
+// import sortReducer from './reducers/sortReducer';
 
 const rootReducer = combineReducers({
   product: productReducer,
   questions: questionsReducer,
   reviews: reviewsReducer,
   related: relatedReducer,
-  reviewSort: sortReducer
+  reviewSort: sortReducer,
+  reviewsShow: showReducer
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
