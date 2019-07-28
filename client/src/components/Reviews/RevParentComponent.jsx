@@ -3,9 +3,13 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Grid } from '@material-ui/core';
+import { Paper, Grid, Dialog } from '@material-ui/core';
 
-import { fetchReviews, fetchMeta } from '../../actions/reviewsActions';
+import {
+  fetchReviews,
+  fetchMeta,
+  openReviews
+} from '../../actions/reviewsActions';
 
 // Child Components
 import Recommended from './Recommended.jsx';
@@ -15,6 +19,8 @@ import StarGraphsList from './StarGraphsList.jsx';
 import SelectControl from './Relevance';
 import AverageRev from './AverageRev';
 import ReviewCounter from './ReviewCounter';
+// import MoreReviews from './MoreReviews';
+import AddReviewModal from './AddReviewModal';
 
 // Testing Form
 import Form from './Form/Form';
@@ -47,6 +53,42 @@ const RevParentComponent = (props) => {
     fetchMeta(pathname);
   });
 
+  // More Reviews Buttons
+  const handleOpen = () => {
+    openReviews(true);
+  };
+
+  const handleClose = () => {
+    openReviews(false);
+  };
+
+  const renderButtons = () => {
+    const { showReviews, limit } = props;
+
+    let moreReviewsButton = (
+      <Button
+        variant="outlined"
+        onClick={handleLimit.bind(this)}
+        style={{ padding: '10px', margin: '10px', fontSize: 20 }}
+      >
+        MORE REVIEWS
+      </Button>
+    );
+
+    let addButton = <AddReviewModal />;
+
+    if (showReviews - limit > 0) {
+      return (
+        <Grid>
+          {moreReviewsButton}
+          {addButton}
+        </Grid>
+      );
+    } else {
+      return addButton;
+    }
+  };
+
   return (
     <div className={classes.root} id="reviews">
       <Grid container spacing={3}>
@@ -70,6 +112,7 @@ const RevParentComponent = (props) => {
           </Paper>
         </Grid>
 
+        {/* Right side, Review List, Count, Sort, and "More"/"Add" Buttons */}
         <Grid item xs={9} style={{ fontSize: 20, fontWeight: 700 }}>
           <Grid
             container
@@ -79,9 +122,24 @@ const RevParentComponent = (props) => {
           >
             <ReviewCounter /> {'   '} <SelectControl />
           </Grid>
-          <div>
+
+          {/* List */}
+          <Grid>
             <ReviewList />
-          </div>
+          </Grid>
+          {/* Buttons */}
+          <Box className={classes.buttons}>
+            {renderButtons()}
+
+            <Dialog
+              open={props.open}
+              onClose={handleClose}
+              fullWidth={true}
+              maxWidth="sm"
+            >
+              <AddReviewModal handleClose={handleClose.bind(this)} />
+            </Dialog>
+          </Box>
         </Grid>
       </Grid>
     </div>
@@ -96,8 +154,10 @@ const RevParentComponent = (props) => {
 
 // FIXME: i don't think I need this...
 const mapStateToProps = (store) => ({
-  reviews: store.reviews,
-  meta: store.meta
+  reviews: store.reviews.data,
+  meta: store.reviews.meta,
+  limit: store.reviewsLimit,
+  showRev: store.reviewsShow
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -19,6 +19,43 @@ const reviewsReducer = (state = intialState, action) => {
   }
 };
 
+// const metaInit = {
+//   meta: {
+//     ratings: {},
+//     recommended: {},
+//     characteristics: {}
+//   }
+// };
+
+// const metaReducer = (state = metaInit, action) => {
+//   switch (action.type) {
+//     case 'FETCH_META_SUCCESS':
+//       return { ...state, meta: action.payload };
+//     case 'FETCH_META_FAILURE':
+//       return state;
+//     default:
+//       return state;
+//   }
+// };
+
+const openReducer = (state = false, { type, payload }) => {
+  switch (type) {
+    case 'OPEN_REVIEWS':
+      return payload;
+    default:
+      return state;
+  }
+};
+
+const limitReducer = (state = 2, { type, payload }) => {
+  switch (type) {
+    case 'LIMIT_REVIEWS':
+      return payload;
+    default:
+      return state;
+  }
+};
+
 const sortReducer = (state = 'relevant', { type, payload }) => {
   switch (type) {
     case 'REVIEWS_SORT':
@@ -37,4 +74,12 @@ const showReducer = (state = 2, { type, payload }) => {
   }
 };
 
-export default { reviewsReducer, sortReducer, showReducer };
+export {
+  reviewsReducer,
+  openReducer,
+  limitReducer,
+  sortReducer,
+  showReducer
+  // Refactor for later
+  // , metaReducer
+};

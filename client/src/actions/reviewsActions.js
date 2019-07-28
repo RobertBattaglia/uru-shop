@@ -63,7 +63,6 @@ export const putHelpful = (reviewId) => {
 };
 
 // Report
-
 export const reportReview = (reviewId) => {
   // const url = `${API_URL}/reviews/report/${reviewId}`;
   const url = `http://18.222.40.124/reviews/helpful/${reviewId}`;
@@ -103,6 +102,19 @@ export const postReview = (reviewObj, prodId) => {
       });
 };
 
+// Open Reviews - More Rev button
+export const openReviews = boolean => ({
+  type: 'OPEN_REVIEWS',
+  payload: boolean
+});
+
+// Limit No. of reviews that can be opened
+export const reviewLimit = limit => ({
+  type: 'LIMIT_REVIEWS',
+  payload: limit
+});
+
+// Sort Reviews
 export const sortReviews = sort => (dispatch, getState) => {
   const { productId } = getState();
   dispatch({
@@ -112,11 +124,11 @@ export const sortReviews = sort => (dispatch, getState) => {
   dispatch(fetchReviews(productId, sort));
 };
 
+// Show reviews
 export const showReviews = length => ({
   type: 'SHOW_REVIEWS',
   payload: length
 });
-
 
 export default {
   fetchReviews,
@@ -124,5 +136,8 @@ export default {
   putHelpful,
   reportReview,
   postReview,
-  sortReviews
+  openReviews,
+  reviewLimit,
+  sortReviews,
+  showReviews
 };

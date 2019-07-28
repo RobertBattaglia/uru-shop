@@ -26,11 +26,11 @@ const ReviewsWrapper = (props) => {
   );
 };
 
-ReviewsWrapper.propTypes = {
-  fetchReviews: PropTypes.func.isRequired,
-  fetchMeta: PropTypes.func.isRequired,
-  location: PropTypes.object.isRequired
-};
+// ReviewsWrapper.propTypes = {
+//   fetchReviews: PropTypes.func.isRequired,
+//   fetchMeta: PropTypes.func.isRequired,
+//   location: PropTypes.object.isRequired
+// };
 
 const mapStateToProps = (store) => ({
   reviews: store.reviews,

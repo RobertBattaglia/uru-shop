@@ -1,10 +1,16 @@
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { Grid } from '@material-ui/core';
 
-import { fetchReviews } from '../../actions/reviewsActions';
+import {
+  fetchReviews,
+  fetchMeta,
+  sortReviews,
+  openReviews
+} from '../../actions/reviewsActions';
 
 import ReviewEntry from './ReviewEntry';
 import MoreReviews from './MoreReviews';
@@ -67,23 +73,21 @@ import AddReviewModal from './AddReviewModal';
 const ReviewList = (props) => {
   const { data, fetchReviews } = props;
 
-  // to get dynamic sorting
-  useEffect(() => {
-    fetchReviews(productId, 'relevant');
-    getMeta(productId);
-  }, [productId]);
-
   return !data ? (
     <h3>...Loading reviews</h3>
   ) : (
     <div>
+      {/* 
+      
+      Each Entry
+
       {data.results.slice(0, this.state.limit).map((review) => {
         return (
           <div key={review.review_id}>
             <ReviewEntry review={review} />
           </div>
         );
-      })}
+      })} */}
 
       {/* Buttons */}
       <Grid
@@ -93,7 +97,10 @@ const ReviewList = (props) => {
         justify="flex-start"
         direction="row"
       >
-        <Grid item onClick={this.loadMore}>
+        <Grid
+          item
+
+        >
           <MoreReviews />
         </Grid>
         <Grid item>
@@ -111,10 +118,11 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = (dispatch) => ({
   fetchReviews: (productId, sort) => {
     dispatch(fetchReviews(productId, sort));
-  },
-  fetchMeta: (prodId) => {
-    dispatch(fetchMeta(prodId));
   }
+  // ,
+  // fetchMeta: (prodId) => {
+  //   dispatch(fetchMeta(prodId));
+  // }
 });
 
 export default connect(

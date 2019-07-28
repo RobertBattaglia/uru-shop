@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 
+
+// TODO: DELETE THIS COMPONENT
+
 class MoreReviews extends Component {
   render() {
     return (

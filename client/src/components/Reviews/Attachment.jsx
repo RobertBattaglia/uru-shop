@@ -19,8 +19,8 @@ const AddAttachment = (props) => {
   );
 };
 
-AddAttachment.propTypes = {
-  features: PropTypes.array.isRequired
-};
+// AddAttachment.propTypes = {
+//   features: PropTypes.array.isRequired
+// };
 
 export default AddAttachment;

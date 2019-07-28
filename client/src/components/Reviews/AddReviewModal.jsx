@@ -75,9 +75,9 @@ class AddReviewModal extends Component {
   }
 }
 
-AddReviewModal.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+// AddReviewModal.propTypes = {
+//   classes: PropTypes.object.isRequired
+// };
 
 const SimpleModalWrapped = withStyles(styles)(AddReviewModal);
 
