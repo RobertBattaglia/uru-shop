@@ -2,17 +2,11 @@
 
 # Uru Shop Documentation
 
-<!-- INSERT GIF OF OVERALL APP HERE -->
-
-A four person dev team created a mock shopping app focusing on the front-end using React-Redux as the primary libraries. Material-UI was leveraged for styling and icons. React-Router was used for client-side routing. This project was built in two weeks using guidelines from a mock buisness requirements document. The given data supplied to the team from an API can be viewed at the individual components [README](#Components)
+A four person team created a mock ecommerce app using React and Redux. This project was completed in two weeks following specs from an extensive buisness requirements document.
 
 <p align="center">
 <img src="documentation/logos.png">
 </p>
-
-> - 🎣 React Hooks - Alongside Redux, each team member implemented hooks in their component
-> - 🎭 Unit, Integration and End to End tests
-> - 📦 Webpack Build
 
 ## Table of Contents
 
@@ -29,12 +23,6 @@ A four person dev team created a mock shopping app focusing on the front-end usi
 - `npm install` - install dependencies
 - `npm start` - start the server in production
 - `npm run build` - webpack build the front end
-
-> Alternatively run the following script to simultaneously run the server and build
-
-- `npm run dev` - concurrently start the server and build the front end
-
-* Navigate to http://localhost:4000/
 
 ## Technologies-Used
 
@@ -56,7 +44,6 @@ A four person dev team created a mock shopping app focusing on the front-end usi
 
 > Testing Suite
 
-- [Puppeteer](https://pptr.dev/)
 - [Jest](https://jestjs.io/docs/en/api)
 
 ## Requirements
@@ -91,9 +78,3 @@ The seperate team member was in charge of the 4 main components seen on the app.
 ### Reviews
 
 - For more information regarding the Reviews portion for this app, please refer to the [ Reviews README](documentation/Reviews/README.md)
-
-## Notes
-
-> **IMPORTANT: development vs. production**
->
-> - Some notes go here
