@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/teamuru/greenfieldApp.svg?branch=master)](https://travis-ci.org/teamuru/greenfieldApp)
 
-# Green Field App Documentation
+# Uru Shop Documentation
 
 <!-- INSERT GIF OF OVERALL APP HERE -->
 
